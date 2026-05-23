@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Tarek H. ElTahawy | Professional Resume</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Sora:wght@100..800&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-sans: 'Inter', sans-serif;
+            --font-display: 'Sora', sans-serif;
+        }
+        body {
+            font-family: var(--font-sans);
+            background-color: #020617;
+            background-image: radial-gradient(circle at top left, rgba(34, 211, 238, 0.15), transparent 22%), radial-gradient(circle at top right, rgba(59, 130, 246, 0.10), transparent 18%), radial-gradient(circle at 50% 100%, rgba(79, 70, 229, 0.08), transparent 24%);
+            color: #94a3b8;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, .font-display { font-family: var(--font-display); }
+        .text-gradient-water {
+            background: linear-gradient(to right, #22d3ee, #3b82f6, #4f46e5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .bg-glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .animate-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        .section-label {
+            letter-spacing: 0.35em;
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+        .welcome-hero {
+            position: relative;
+            height: 100vh;
+            background: #000;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .welcome-hero .stars {
+            position: absolute;
+            inset: 0;
+            background-color: #000;
+            background-image:
+                radial-gradient(circle, rgba(255,255,255,0.95) 1px, transparent 1px),
+                radial-gradient(circle, rgba(255,255,255,0.75) 1px, transparent 1px),
+                radial-gradient(circle, rgba(255,255,255,0.65) 1px, transparent 1px),
+                radial-gradient(circle, rgba(255,255,255,0.55) 1px, transparent 1px);
+            background-size: 150px 150px, 200px 200px, 120px 120px, 250px 250px;
+            background-position: 10% 10%, 60% 25%, 30% 70%, 80% 15%;
+            opacity: 0.8;
+            filter: blur(0.15px);
+            animation: twinkleStars 20s ease-in-out infinite;
+        }
+        @keyframes twinkleStars {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            25% {
+                opacity: 0.7;
+                transform: scale(1.1);
+            }
+            50% {
+                opacity: 0.3;
+                transform: scale(0.9);
+            }
+            75% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+        }
+        .welcome-hero {
+            /* keep welcome screen visible until JS triggers hide */
+        }
+        .welcome-hero.hide {
+            animation: welcomeHide 1s ease-out forwards;
+        }
+        .nav-visible {
+            opacity: 1 !important;
+        }
+        @keyframes welcomeHide {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+                visibility: visible;
+                height: 100vh;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-20px);
+                visibility: hidden;
+                height: 0;
+            }
+        }
+        .animation-container {
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
+            width: 100%;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 2rem 1.5rem;
+            border-radius: 2rem;
+            backdrop-filter: blur(18px);
+            background: rgba(15, 23, 42, 0.65);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .drawing-lines {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 800px;
+            height: auto;
+            overflow: visible;
+        }
+        .line {
+            fill: none;
+            stroke: rgba(56, 189, 248, 0.9);
+            stroke-width: 3;
+            stroke-dasharray: 400;
+            stroke-dashoffset: 400;
+            animation: drawLine 1.5s ease-out forwards;
+        }
+        .line-2 {
+            animation-delay: 0.5s;
+        }
+        @keyframes drawLine {
+            to { stroke-dashoffset: 0; }
+        }
+        .welcome-text {
+            color: #fff;
+            font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+            font-family: 'Inter', sans-serif;
+            z-index: 2;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.35rem;
+            text-align: center;
+            line-height: 1.05;
+        }
+        .welcome-text span {
+            display: inline-flex;
+            opacity: 0;
+            transform: translateY(-100px);
+            animation: fallLetter 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        .welcome-text span.space {
+            width: 0.8rem;
+            opacity: 1;
+            transform: none;
+            animation: none;
+        }
+        @keyframes fallLetter {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .welcome-text span:nth-child(1) { animation-delay: 1.5s; }
+        .welcome-text span:nth-child(2) { animation-delay: 1.6s; }
+        .welcome-text span:nth-child(3) { animation-delay: 1.7s; }
+        .welcome-text span:nth-child(4) { animation-delay: 1.8s; }
+        .welcome-text span:nth-child(5) { animation-delay: 1.9s; }
+        .welcome-text span:nth-child(6) { animation-delay: 2.0s; }
+        .welcome-text span:nth-child(7) { animation-delay: 2.1s; }
+        .welcome-text span:nth-child(8) { animation-delay: 2.2s; }
+        .welcome-text span:nth-child(9) { animation-delay: 2.3s; }
+        .welcome-text span:nth-child(10) { animation-delay: 2.4s; }
+        .welcome-text span:nth-child(11) { animation-delay: 2.5s; }
+        .welcome-text span:nth-child(12) { animation-delay: 2.6s; }
+        .welcome-text span:nth-child(13) { animation-delay: 2.7s; }
+        .welcome-text span:nth-child(14) { animation-delay: 2.8s; }
+        .welcome-text span:nth-child(15) { animation-delay: 2.9s; }
+        .welcome-text span:nth-child(16) { animation-delay: 3.0s; }
+        .welcome-text span:nth-child(17) { animation-delay: 3.1s; }
+        .welcome-text span:nth-child(18) { animation-delay: 3.2s; }
+        .welcome-text span:nth-child(19) { animation-delay: 3.3s; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .tagline-text {
+            color: rgba(56, 189, 248, 0.8);
+            font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            position: absolute;
+            top: 80%;
+            left: 50%;
+            transform: translateX(-50%);
+            overflow: hidden;
+            white-space: nowrap;
+            animation: wipeIn 2s ease-out 4s forwards;
+            opacity: 0;
+            z-index: 1;
+        }
+        @keyframes wipeIn {
+            0% {
+                opacity: 0;
+                width: 0;
+                overflow: hidden;
+            }
+            50% {
+                opacity: 1;
+                width: 0;
+                overflow: hidden;
+            }
+            100% {
+                opacity: 1;
+                width: 100%;
+                overflow: visible;
+            }
+        }
+    </style>
+</head>
+<body class="selection:bg-cyan-500/30">
+
+    <!-- Navigation -->
+    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-xl border-b border-white/5 py-4 opacity-0 transition-opacity duration-500 ease-in-out">
+        <div class="max-w-6xl mx-auto px-6 flex items-center justify-between">
+            <a href="#" class="text-lg font-bold text-gradient-water tracking-tight">Tarek H. ElTahawy</a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#experience" class="text-[11px] font-black text-zinc-500 hover:text-cyan-400 transition-colors tracking-[0.2em] uppercase">Experience</a>
+                <a href="#education" class="text-[11px] font-black text-zinc-500 hover:text-cyan-400 transition-colors tracking-[0.2em] uppercase">Education</a>
+                <a href="#projects" class="text-[11px] font-black text-zinc-500 hover:text-cyan-400 transition-colors tracking-[0.2em] uppercase">Projects</a>
+                <a href="#research" class="text-[11px] font-black text-zinc-500 hover:text-cyan-400 transition-colors tracking-[0.2em] uppercase">Research</a>
+                <a href="#skills" class="text-[11px] font-black text-zinc-500 hover:text-cyan-400 transition-colors tracking-[0.2em] uppercase">Skills</a>
+                <a href="#awards" class="text-[11px] font-black text-zinc-500 hover:text-cyan-400 transition-colors tracking-[0.2em] uppercase">Awards</a>
+                <a href="mailto:tarek@example.com" class="px-5 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-[11px] font-black tracking-[0.1em] uppercase">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="welcome-hero">
+      <div class="stars"></div>
+      <div class="animation-container">
+        <svg class="drawing-lines" viewBox="0 0 500 100" aria-hidden="true">
+          <path class="line line-1" d="M 50 5 L 450 5" />
+          <path class="line line-2" d="M 50 95 L 450 95" />
+        </svg>
+        <h1 class="welcome-text">
+          <span>W</span><span>e</span><span>l</span><span>c</span><span>o</span><span>m</span><span>e</span>
+          <span class="space"> </span>
+          <span>t</span><span>o</span><span class="space"> </span>
+          <span>m</span><span>y</span>
+          <span class="space"> </span>
+          <span>P</span><span>a</span><span>g</span><span>e</span><span>!</span>
+        </h1>
+        <p class="tagline-text">where water meets Engineering ...</p>
+      </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section id="about" class="min-h-screen flex flex-col items-center justify-center px-6 pt-20 text-center animate-in">
+        <div class="mb-8 relative">
+            <div class="w-44 h-44 rounded-3xl overflow-hidden border border-white/10 bg-zinc-900 shadow-2xl">
+                <img src="images/Tarek Photo.jpg" class="w-full h-full object-cover">
+            </div>
+            <div class="absolute -inset-4 bg-cyan-500/10 blur-[40px] rounded-full opacity-30"></div>
+        </div>
+
+        <div class="max-w-3xl">
+            <div class="mb-6 inline-flex items-center gap-3 rounded-md border border-white/5 bg-white/[0.02] px-4 py-1.5 backdrop-blur-md">
+                <span class="tracking-[0.3em] uppercase text-[10px] font-bold text-zinc-500">Assistant Professor | Civil Engineering</span>
+            </div>
+            <h1 class="mb-6 text-5xl font-bold text-gradient-water">Dr. Tarek H. ElTahawy</h1>
+            <p class="mb-10 text-lg text-zinc-400 italic tracking-[0.04em] font-light">
+                Leading water resources innovation across academia and civil infrastructure design with over 20 years of international engineering impact.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="mailto:tarek@example.com" class="bg-white text-black px-8 py-3 rounded-xl font-black text-[12px] uppercase tracking-widest shadow-xl">Contact Me</a>
+                <a href="#projects" class="bg-white/5 border border-white/10 text-zinc-300 px-8 py-3 rounded-xl font-black text-[12px] uppercase tracking-widest">View Work</a>
+                <a href="Sources/T_Tahawy Resume.pdf" target="_blank" class="border border-cyan-500/20 text-cyan-300 px-8 py-3 rounded-xl font-black text-[12px] uppercase tracking-widest">Download CV</a>
+            </div>
+            <div class="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+                <div class="rounded-3xl border border-white/5 bg-white/[0.03] p-6 text-left shadow-lg shadow-cyan-500/5">
+                    <p class="text-[10px] uppercase tracking-[0.35em] text-zinc-500 mb-4">Experience</p>
+                    <h3 class="text-3xl font-bold text-white">20+</h3>
+                    <p class="text-sm text-zinc-400 mt-3">Years in water resources engineering, teaching and infrastructure design.</p>
+                </div>
+                <div class="rounded-3xl border border-white/5 bg-white/[0.03] p-6 shadow-lg shadow-blue-500/5">
+                    <p class="text-[10px] uppercase tracking-[0.35em] text-zinc-500 mb-4">Projects</p>
+                    <h3 class="text-3xl font-bold text-white">7+</h3>
+                    <p class="text-sm text-zinc-400 mt-3">Major civil, drainage and flood mitigation programs in North America and the Middle East.</p>
+                </div>
+                <div class="rounded-3xl border border-white/5 bg-white/[0.03] p-6 shadow-lg shadow-violet-500/5">
+                    <p class="text-[10px] uppercase tracking-[0.35em] text-zinc-500 mb-4">Research</p>
+                    <h3 class="text-3xl font-bold text-white">20+</h3>
+                    <p class="text-sm text-zinc-400 mt-3">Contributions to experimental hydraulics, meandering flow and flood management research.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Summary -->
+    <section id="summary" class="py-20 px-6 max-w-6xl mx-auto">
+        <div class="grid gap-10 lg:grid-cols-[1.2fr_0.85fr] items-start">
+            <div class="space-y-6">
+                <div class="text-[11px] font-black uppercase tracking-[0.4em] text-zinc-500 flex items-center gap-4">
+                    <span class="w-8 h-px bg-white/10"></span> Profile Overview
+                </div>
+                <h2 class="text-4xl font-bold text-white">Bridging research rigor with practical hydraulic engineering.</h2>
+                <p class="text-base text-zinc-400 leading-relaxed">Dr. ElTahawy combines academic leadership and field-proven water resources engineering. His work spans river hydraulics, hydrologic modeling, drainage systems, flood mitigation, and infrastructure delivery for public agencies in Saudi Arabia, Canada, the United States, and Egypt.</p>
+                <div class="grid gap-4 sm:grid-cols-2">
+                    <div class="rounded-3xl border border-white/5 bg-white/[0.03] p-6">
+                        <h3 class="text-sm uppercase tracking-[0.2em] text-cyan-300 mb-3">Professional Strengths</h3>
+                        <ul class="space-y-2 text-sm text-zinc-400 leading-relaxed">
+                            <li>Hydrologic &amp; hydraulic modeling</li>
+                            <li>Floodplain delineation &amp; conveyance design</li>
+                            <li>Graduate instruction and curriculum development</li>
+                        </ul>
+                    </div>
+                    <div class="rounded-3xl border border-white/5 bg-white/[0.03] p-6">
+                        <h3 class="text-sm uppercase tracking-[0.2em] text-cyan-300 mb-3">Industry Reach</h3>
+                        <ul class="space-y-2 text-sm text-zinc-400 leading-relaxed">
+                            <li>Taif University, Saudi Arabia</li>
+                            <li>Primatech Engineers &amp; Consultants, USA</li>
+                            <li>Queen’s University, Canada</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="rounded-3xl border border-white/5 bg-white/[0.03] p-8 shadow-xl shadow-cyan-500/5">
+                <div class="mb-6">
+                    <p class="text-[11px] uppercase tracking-[0.35em] text-zinc-500 mb-3">Contact</p>
+                    <p class="font-semibold text-white">tarek.tahawy@gmail.com</p>
+                    <p class="text-sm text-zinc-400 mt-2">Phone: (+966) 542-964149</p>
+                    <p class="text-sm text-zinc-400">Kingdom of Saudi Arabia • Canadian status</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="rounded-3xl border border-white/5 bg-zinc-950/60 p-5">
+                        <p class="text-[11px] uppercase tracking-[0.25em] text-zinc-500 mb-2">Academic Credentials</p>
+                        <p class="text-sm font-semibold text-white">Ph.D. Civil Engineering</p>
+                        <p class="text-sm text-zinc-400">Queen’s University, Canada</p>
+                    </div>
+                    <div class="rounded-3xl border border-white/5 bg-zinc-950/60 p-5">
+                        <p class="text-[11px] uppercase tracking-[0.25em] text-zinc-500 mb-2">Technical Expertise</p>
+                        <p class="text-sm font-semibold text-white">HEC-RAS, ArcGIS, AutoCAD/Civil 3D, HEC-GeoRAS</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="py-20 px-6 max-w-6xl mx-auto">
+        <h2 class="text-[11px] font-black uppercase tracking-[0.4em] text-zinc-500 mb-12 flex items-center gap-4">
+            <span class="w-8 h-px bg-white/10"></span> Professional Experience
+        </h2>
+        <div class="space-y-6">
+            <div class="bg-white/[0.02] p-8 rounded-2xl border border-white/5">
+                <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-zinc-200">Assistant Professor</h3>
+                        <p class="text-sm font-bold text-cyan-500/70 tracking-widest uppercase">Taif University, Saudi Arabia</p>
+                    </div>
+                    <span class="text-[9px] font-black text-zinc-600 uppercase tracking-widest">2014 – Present</span>
+                </div>
+                <p class="text-sm font-light leading-relaxed mb-4">Leading water resources engineering education and research while supervising senior capstone projects, chairing the Capstone Project Committee, and supporting accreditation initiatives.</p>
+                <ul class="list-disc list-inside text-sm text-zinc-400 leading-relaxed space-y-2">
+                    <li>Delivered Fluid Mechanics, Hydraulics, Environmental Hydraulics, Sanitary Drainage, and Irrigation courses.</li>
+                    <li>Guided capstone teams through practical water resources and wastewater engineering design.</li>
+                    <li>Developed multimedia teaching materials and technical writing resources for students.</li>
+                </ul>
+            </div>
+            <div class="bg-white/[0.02] p-8 rounded-2xl border border-white/5">
+                <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-zinc-200">Water Resources Engineer</h3>
+                        <p class="text-sm font-bold text-cyan-500/70 tracking-widest uppercase">Primatech Engineers & Consultants, USA</p>
+                    </div>
+                    <span class="text-[9px] font-black text-zinc-600 uppercase tracking-widest">2007 – 2014</span>
+                </div>
+                <p class="text-sm font-light leading-relaxed mb-4">Managed major municipal and highway drainage programs, combining hydrologic/hydraulic modeling with technical design, documentation, and stakeholder coordination.</p>
+                <ul class="list-disc list-inside text-sm text-zinc-400 leading-relaxed space-y-2">
+                    <li>Prepared construction-ready drainage memoranda, erosion protection designs, and ADOT-compliant culvert systems.</li>
+                    <li>Coordinated project reviews with FCDMC, ADOT, City of Scottsdale and City of Phoenix.</li>
+                    <li>Delivered technical leadership for sewer, wash, highway, and stormwater infrastructure programs.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="py-20 px-6 max-w-6xl mx-auto">
+        <h2 class="text-[11px] font-black uppercase tracking-[0.4em] text-zinc-500 mb-12 flex items-center gap-4">
+            <span class="w-8 h-px bg-white/10"></span> Education
+        </h2>
+        <div class="space-y-6">
+            <div class="bg-white/[0.02] p-8 rounded-2xl border border-white/5">
+                <h3 class="text-xl font-bold text-zinc-200 mb-2">Ph.D. in Civil Engineering</h3>
+                <p class="text-sm font-bold text-cyan-500/70 mb-4 tracking-widest uppercase">Queen’s University — Kingston, Canada</p>
+                <p class="text-sm font-light leading-relaxed">Hydro-technical specialization with a focus on experimental river hydraulics, meandering stream behavior, and flow-bed interaction.</p>
+            </div>
+            <div class="bg-white/[0.02] p-8 rounded-2xl border border-white/5">
+                <h3 class="text-xl font-bold text-zinc-200 mb-2">M.Sc. in Civil Engineering</h3>
+                <p class="text-sm font-bold text-cyan-500/70 mb-4 tracking-widest uppercase">Helwan University — Cairo, Egypt</p>
+                <p class="text-sm font-light leading-relaxed">Specialized in water resources engineering, stormwater management, and hydraulic system design.</p>
+            </div>
+            <div class="bg-white/[0.02] p-8 rounded-2xl border border-white/5">
+                <h3 class="text-xl font-bold text-zinc-200 mb-2">B.Sc. in Civil Engineering</h3>
+                <p class="text-sm font-bold text-cyan-500/70 mb-4 tracking-widest uppercase">Helwan University — Cairo, Egypt</p>
+                <p class="text-sm font-light leading-relaxed">Graduated with honors and completed senior projects in water resources and environmental hydraulics.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="py-20 px-6 max-w-6xl mx-auto">
+        <h2 class="text-[11px] font-black uppercase tracking-[0.4em] text-zinc-500 mb-12 flex items-center gap-4">
+            <span class="w-8 h-px bg-white/10"></span> Projects & Impact
+        </h2>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="bg-white/[0.02] rounded-2xl overflow-hidden border border-white/5">
+                <img src="images/Sanitary Sewer.jpg" alt="Broadway Road Sewer Replacement" class="w-full h-44 object-cover">
+                <div class="p-8">
+                    <h3 class="text-lg font-bold text-white mb-2">Broadway Road Sewer Replacement</h3>
+                    <p class="text-sm text-zinc-400 leading-relaxed mb-4">Lead engineer for capacity upgrade of an arterial sewer main to meet 2055 wastewater flow projections.</p>
+                    <p class="text-[11px] uppercase tracking-[0.25em] font-black text-zinc-500">City of Phoenix, AZ</p>
+                </div>
+            </div>
+            <div class="bg-white/[0.02] rounded-2xl overflow-hidden border border-white/5">
+                <img src="images/UCW.jpg" alt="UCW Flood Mitigation" class="w-full h-44 object-cover">
+                <div class="p-8">
+                    <h3 class="text-lg font-bold text-white mb-2">Upper Camelback Wash</h3>
+                    <p class="text-sm text-zinc-400 leading-relaxed mb-4">Oversaw hydraulic analysis and design recommendations for a $14M flood mitigation program.</p>
+                    <p class="text-[11px] uppercase tracking-[0.25em] font-black text-zinc-500">City of Scottsdale, AZ</p>
+                </div>
+            </div>
+            <div class="bg-white/[0.02] rounded-2xl overflow-hidden border border-white/5">
+                <img src="images/Cordes_junction.jpg" alt="Cordes Junction Highway Drainage" class="w-full h-44 object-cover">
+                <div class="p-8">
+                    <h3 class="text-lg font-bold text-white mb-2">Highway Drainage Design</h3>
+                    <p class="text-sm text-zinc-400 leading-relaxed mb-4">Designed stormwater conveyance, culverts, inlets, and erosion protection for major ADOT and municipal corridors.</p>
+                    <p class="text-[11px] uppercase tracking-[0.25em] font-black text-zinc-500">US93, I-17, Riggs Road — Arizona</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research -->
+    <section id="research" class="py-20 px-6 max-w-6xl mx-auto">
+        <h2 class="text-[11px] font-black uppercase tracking-[0.4em] text-zinc-500 mb-12 flex items-center gap-4">
+            <span class="w-8 h-px bg-white/10"></span> Publications & Research
+        </h2>
+        <div class="grid gap-6 md:grid-cols-2">
+            <div class="bg-white/[0.02] rounded-2xl border border-white/5 p-8">
+                <p class="text-[11px] uppercase tracking-[0.3em] text-cyan-300 mb-4">Selected publications</p>
+                <ul class="space-y-4 text-sm text-zinc-400 leading-relaxed">
+                    <li><span class="font-semibold text-white">A Bestawy, T Eltahawy, A Alsaluli, A Almaliki, M Alqurashi (2020)</span>: “Reduction of Local Scour around a Bridge Pier by Using Different Shapes of Pier Slots and Collars”. Water Supply 20 (3), 1006-1015.</li>
+                    <li><span class="font-semibold text-white">Assessment and Management of Flash Floods</span> — Int. Journal of Applied Engineering Research, 2017.</li>
+                    <li><span class="font-semibold text-white">Grain Size Effect on Bed Deformation</span> — IAHR European Congress, 2010.</li>
+                    <li><span class="font-semibold text-white">Bed Topography of Meandering Streams</span> — River Flow 2008.</li>
+                    <li><span class="font-semibold text-white">Location of Hills and Deeps in Meandering Streams</span> — River Flow 2006.</li>
+                </ul>
+            </div>
+            <div class="bg-white/[0.02] rounded-2xl border border-white/5 p-8">
+                <p class="text-[11px] uppercase tracking-[0.3em] text-cyan-300 mb-4">Research focus</p>
+                <p class="text-sm text-zinc-400 leading-relaxed mb-4">Experimental and numerical studies of flow structure, erosion-deposition patterns, and hydraulic control in meandering channels. Practical insights are translated into design strategies for flood-prone infrastructure.</p>
+                <div class="grid gap-4">
+                    <div class="rounded-2xl bg-zinc-950/60 p-4">
+                        <p class="text-[11px] uppercase tracking-[0.25em] text-zinc-500 mb-2">Journal Review</p>
+                        <p class="text-sm text-zinc-400">Reviewer for ASCE Journal of Hydraulic Engineering and Canadian Society for Civil Engineering publications.</p>
+                    </div>
+                    <div class="rounded-2xl bg-zinc-950/60 p-4">
+                        <p class="text-[11px] uppercase tracking-[0.25em] text-zinc-500 mb-2">Professional Memberships</p>
+                        <p class="text-sm text-zinc-400">Registered PE, Arizona • IAHR • Egyptian Syndicate of Engineers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="py-20 px-6 max-w-6xl mx-auto">
+        <h2 class="text-[11px] font-black uppercase tracking-[0.4em] text-zinc-500 mb-12 flex items-center gap-4">
+            <span class="w-8 h-px bg-white/10"></span> Technical Core
+        </h2>
+        <div class="grid gap-12 lg:grid-cols-3">
+            <div>
+                <h3 class="text-[9px] font-black text-zinc-600 border-b border-white/5 pb-4 mb-6 uppercase tracking-widest">Software</h3>
+                <div class="space-y-4">
+                    <div class="text-[10px] font-bold text-zinc-400">HEC-RAS / HEC-GeoRAS (98%)</div>
+                    <div class="h-1 bg-white/5 rounded-full overflow-hidden"><div class="h-full bg-cyan-500 w-[98%]"></div></div>
+                    <div class="text-[10px] font-bold text-zinc-400">AutoCAD/Civil 3D (92%)</div>
+                    <div class="h-1 bg-white/5 rounded-full overflow-hidden"><div class="h-full bg-cyan-500 w-[92%]"></div></div>
+                    <div class="text-[10px] font-bold text-zinc-400">ArcGIS / HydraFlow (88%)</div>
+                    <div class="h-1 bg-white/5 rounded-full overflow-hidden"><div class="h-full bg-cyan-500 w-[88%]"></div></div>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-[9px] font-black text-zinc-600 border-b border-white/5 pb-4 mb-6 uppercase tracking-widest">Engineering</h3>
+                <div class="space-y-4">
+                    <div class="text-[10px] font-bold text-zinc-400">Hydrologic Modeling (96%)</div>
+                    <div class="h-1 bg-white/5 rounded-full overflow-hidden"><div class="h-full bg-blue-500 w-[96%]"></div></div>
+                    <div class="text-[10px] font-bold text-zinc-400">Flood Mitigation (94%)</div>
+                    <div class="h-1 bg-white/5 rounded-full overflow-hidden"><div class="h-full bg-blue-500 w-[94%]"></div></div>
+                    <div class="text-[10px] font-bold text-zinc-400">Drainage Systems (93%)</div>
+                    <div class="h-1 bg-white/5 rounded-full overflow-hidden"><div class="h-full bg-blue-500 w-[93%]"></div></div>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-[9px] font-black text-zinc-600 border-b border-white/5 pb-4 mb-6 uppercase tracking-widest">Research</h3>
+                <div class="space-y-4">
+                    <div class="text-[10px] font-bold text-zinc-400">Experimental Hydraulics (94%)</div>
+                    <div class="h-1 bg-white/5 rounded-full overflow-hidden"><div class="h-full bg-indigo-500 w-[94%]"></div></div>
+                    <div class="text-[10px] font-bold text-zinc-400">Technical Writing (92%)</div>
+                    <div class="h-1 bg-white/5 rounded-full overflow-hidden"><div class="h-full bg-indigo-500 w-[92%]"></div></div>
+                    <div class="text-[10px] font-bold text-zinc-400">Project Leadership (95%)</div>
+                    <div class="h-1 bg-white/5 rounded-full overflow-hidden"><div class="h-full bg-indigo-500 w-[95%]"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards -->
+    <section id="awards" class="py-20 px-6 max-w-6xl mx-auto">
+        <h2 class="text-[11px] font-black uppercase tracking-[0.4em] text-zinc-500 mb-12 flex items-center gap-4">
+            <span class="w-8 h-px bg-white/10"></span> Awards & Memberships
+        </h2>
+        <div class="grid gap-6 lg:grid-cols-2">
+            <div class="rounded-3xl border border-white/5 bg-white/[0.02] p-8">
+                <p class="text-[11px] uppercase tracking-[0.35em] text-cyan-300 mb-4">Honors</p>
+                <ul class="space-y-4 text-sm text-zinc-400 leading-relaxed">
+                    <li><span class="font-semibold text-white">Best Teaching Assistant Award</span> — Queen’s University, Winter 2004.</li>
+                    <li><span class="font-semibold text-white">Ontario Graduate Scholarship</span> — Queen’s University, 2002–2004.</li>
+                    <li><span class="font-semibold text-white">Louisa A. Fowler Graduate Fellowship</span> — Queen’s University, 2001–2002.</li>
+                    <li><span class="font-semibold text-white">Egyptian Ministry of Higher Education Excellence Award</span> — 1991–1992.</li>
+                </ul>
+            </div>
+            <div class="rounded-3xl border border-white/5 bg-white/[0.02] p-8">
+                <p class="text-[11px] uppercase tracking-[0.35em] text-cyan-300 mb-4">Professional Affiliations</p>
+                <ul class="space-y-4 text-sm text-zinc-400 leading-relaxed">
+                    <li><span class="font-semibold text-white">Registered Professional Engineer (PE)</span> — Arizona, USA.</li>
+                    <li><span class="font-semibold text-white">Member</span> — IAHR.</li>
+                    <li><span class="font-semibold text-white">Reviewer</span> — ASCE Journal of Hydraulic Engineering and CSCE.</li>
+                    <li><span class="font-semibold text-white">Certified Engineer</span> — Egyptian Syndicate of Engineers.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-24 px-6 text-center border-t border-white/5">
+        <h2 class="text-3xl font-bold text-gradient-water mb-6">Shape the Future of Water.</h2>
+        <p class="max-w-2xl mx-auto text-zinc-400 leading-relaxed mb-8">Connect with a civil engineer who blends research excellence, field-tested design, and leadership across classroom, laboratory, and major infrastructure programs.</p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+            <a href="mailto:tarek.tahawy@gmail.com" class="bg-cyan-500 text-black px-8 py-3 rounded-xl font-black uppercase tracking-[0.1em]">Email</a>
+            <a href="Sources/T_Tahawy Resume.pdf" target="_blank" class="border border-white/10 text-white px-8 py-3 rounded-xl font-black uppercase tracking-[0.1em]">Resume PDF</a>
+        </div>
+        <p class="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-600">© 2026 Dr. Tarek H. ElTahawy • PE Arizona • Taif University</p>
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            // Scroll to top on page load/refresh
+            window.scrollTo(0, 0);
+
+            const welcome = document.querySelector('.welcome-hero');
+            const nav = document.getElementById('main-nav');
+
+            setTimeout(function() {
+                if (welcome) {
+                    welcome.classList.add('hide');
+                }
+                if (nav) {
+                    nav.classList.add('nav-visible');
+                }
+            }, 8000);
+
+            setTimeout(function() {
+                if (welcome) {
+                    welcome.style.display = 'none';
+                }
+            }, 9200);
+        });
+    </script>
+</body>
+</html>
